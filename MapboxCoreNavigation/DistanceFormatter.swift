@@ -154,8 +154,8 @@ public class DistanceFormatter: LengthFormatter {
     func threshold(for distance: CLLocationDistance) -> RoundingTable.Threshold {
         if NavigationSettings.shared.usesMetric {
             return roundingTableMetric.threshold(for: distance)
-        } else if numberFormatter.locale.identifier == "en-GB" {
-            return roundingTableUK.threshold(for: distance)
+        } else if numberFormatter.locale.identifier == "en-GB" { // Fix wrong voice metric for Region UK
+            return roundingTableMetric.threshold(for: distance)
         } else {
             return roundingTableImperial.threshold(for: distance)
         }
