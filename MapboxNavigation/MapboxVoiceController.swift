@@ -87,10 +87,11 @@ open class MapboxVoiceController: RouteVoiceController {
         let modifiedInstruction = voiceControllerDelegate?.voiceController?(self, willSpeak: instruction, routeProgress: routeProgress!) ?? instruction
         lastSpokenInstruction = modifiedInstruction
 
-//        if let data = cachedDataForKey(modifiedInstruction.ssmlText) {
-//            play(data)
-//            return
-//        }
+        /* // Remove Cache Voice Data
+        if let data = cachedDataForKey(modifiedInstruction.ssmlText) {
+            play(data)
+            return
+        }*/
         
         fetchAndSpeak(instruction: modifiedInstruction)
     }
