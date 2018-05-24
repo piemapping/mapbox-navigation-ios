@@ -175,6 +175,7 @@
 		8DB63A3A1FBBCA2200928389 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB63A391FBBCA2200928389 /* RatingControl.swift */; };
 		8DE879661FBB9980002F06C0 /* EndOfRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE879651FBB9980002F06C0 /* EndOfRouteViewController.swift */; };
 		8DF399B21FB257B30034904C /* UIGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF399B11FB257B30034904C /* UIGestureRecognizer.swift */; };
+		992A619220B6EA8F0061255A /* FixVoiceDistanceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992A619120B6EA8F0061255A /* FixVoiceDistanceFormatter.swift */; };
 		C51245F21F19471C00E33B52 /* MapboxMobileEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C549F8311F17F2C5001A0A2D /* MapboxMobileEvents.framework */; };
 		C51245F31F19471C00E33B52 /* MapboxMobileEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C549F8311F17F2C5001A0A2D /* MapboxMobileEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C51DF8661F38C31C006C6A15 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51DF8651F38C31C006C6A15 /* Locale.swift */; };
@@ -548,6 +549,7 @@
 		8DB63A391FBBCA2200928389 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		8DE879651FBB9980002F06C0 /* EndOfRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndOfRouteViewController.swift; sourceTree = "<group>"; };
 		8DF399B11FB257B30034904C /* UIGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizer.swift; sourceTree = "<group>"; };
+		992A619120B6EA8F0061255A /* FixVoiceDistanceFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixVoiceDistanceFormatter.swift; sourceTree = "<group>"; };
 		C51DF8651F38C31C006C6A15 /* Locale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
 		C520EE911EBB84F9008805BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Navigation.storyboard; sourceTree = "<group>"; };
 		C520EE941EBBBD55008805BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Base.lproj/Navigation.strings; sourceTree = "<group>"; };
@@ -857,6 +859,7 @@
 				35F611C31F1E1C0500C43249 /* FeedbackViewController.swift */,
 				8D8EA9BB20575CD80077F478 /* FeedbackCollectionViewCell.swift */,
 				35025F3E1F051DD2002BA3EA /* DialogViewController.swift */,
+				992A619120B6EA8F0061255A /* FixVoiceDistanceFormatter.swift */,
 				C5A6B2DC1F4CE8E8004260EA /* StyleType.swift */,
 				35B1E2941F1FF8EC00A13D32 /* UserCourseView.swift */,
 				35CB1E121F97DD740011CC44 /* FeedbackItem.swift */,
@@ -1772,6 +1775,7 @@
 				C51DF8671F38C337006C6A15 /* Date.swift in Sources */,
 				359D283C1F9DC14F00FDE9C9 /* UICollectionView.swift in Sources */,
 				8D24A2F820409A890098CBF8 /* CGSize.swift in Sources */,
+				992A619220B6EA8F0061255A /* FixVoiceDistanceFormatter.swift in Sources */,
 				35CB1E131F97DD740011CC44 /* FeedbackItem.swift in Sources */,
 				35F611C41F1E1C0500C43249 /* FeedbackViewController.swift in Sources */,
 				353AA5601FCEF583009F0384 /* StyleManager.swift in Sources */,

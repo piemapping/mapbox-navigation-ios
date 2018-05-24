@@ -12,7 +12,7 @@ class CustomViewController: UIViewController, MGLMapViewDelegate, AVSpeechSynthe
     let directions = Directions.shared
     var routeController: RouteController!
 
-    let textDistanceFormatter = DistanceFormatter(approximate: true)
+    let textDistanceFormatter = FixVoiceDistanceFormatter(approximate: true)
     var userRoute: Route?
     var simulateLocation = false
 

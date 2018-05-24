@@ -21,7 +21,7 @@ open class BottomBannerView: UIView {
     
     let dateFormatter = DateFormatter()
     let dateComponentsFormatter = DateComponentsFormatter()
-    let distanceFormatter = DistanceFormatter(approximate: true)
+    let distanceFormatter = FixVoiceDistanceFormatter(approximate: true)
     
     var verticalCompactConstraints = [NSLayoutConstraint]()
     var verticalRegularConstraints = [NSLayoutConstraint]()
