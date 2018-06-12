@@ -460,6 +460,10 @@ open class NavigationViewController: UIViewController {
         UIApplication.shared.applicationIconBadgeNumber = 1
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
+
+    public func showMapOverview() {
+        mapViewController?.showMapOverview()
+    }
 }
 
 //MARK: - RouteMapViewControllerDelegate

@@ -235,7 +235,14 @@ class RouteMapViewController: UIViewController {
         }
         isInOverviewMode = true
     }
-    
+
+    func showMapOverview() {
+        guard !isInOverviewMode else {
+            return
+        }
+        toggleOverview(navigationView.overviewButton)
+    }
+
     @objc func toggleMute(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
 
