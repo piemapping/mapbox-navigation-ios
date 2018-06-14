@@ -225,7 +225,13 @@ open class NavigationViewController: UIViewController {
             mapViewController?.notifyDidReroute(route: route)
         }
     }
-    
+
+    public var arrivedButtonOnTap: (() -> ())? {
+        didSet {
+            mapViewController?.arrivedButtonOnTap = arrivedButtonOnTap
+        }
+    }
+
     /**
      An instance of `Directions` need for rerouting. See [Mapbox Directions](https://mapbox.github.io/mapbox-navigation-ios/directions/) for further information.
      */
@@ -431,6 +437,26 @@ open class NavigationViewController: UIViewController {
         let secondsRemaining = routeProgress.currentLegProgress.currentStepProgress.durationRemaining
 
         mapViewController?.notifyDidChange(routeProgress: routeProgress, location: location, secondsRemaining: secondsRemaining)
+        
+        if usesNightStyleInsideTunnels, let tunnelIntersectionManager = routeController.tunnelIntersectionManager {
+            if tunnelIntersectionManager.isAnimationEnabled {
+                styleManager.applyStyle(type: .night)
+            } else  {
+                styleManager.timeOfDayChanged()
+            }
+        }
+
+        // Arrived Button
+        handleArrivedButtonLogic(with: routeProgress)
+    }
+
+    func handleArrivedButtonLogic(with routeProgress: RouteProgress) {
+        let currentLegProgress = routeProgress.currentLegProgress
+        let distanceRemaining = currentLegProgress.distanceRemaining
+        let timeRemaining = currentLegProgress.durationRemaining
+
+        print("distanceRemaining = \(distanceRemaining)")
+        print("timeRemaining = \(timeRemaining)")
     }
     
     @objc func didPassInstructionPoint(notification: NSNotification) {
@@ -471,6 +497,10 @@ open class NavigationViewController: UIViewController {
 
     public func showMapOverview() {
         mapViewController?.showMapOverview()
+    }
+
+    public func showArrivedButton() {
+        mapViewController?.showArrivedButton()
     }
 }
 
@@ -606,6 +636,21 @@ extension NavigationViewController: RouteControllerDelegate {
             self.mapViewController?.showEndOfRoute { _ in }
         }
         return advancesToNextLeg
+    }
+
+    public func advanceToNextLeg() {
+
+        // Increase to next leg
+        if !routeController.routeProgress.isFinalLeg {
+            routeController.routeProgress.legIndex += 1
+            routeController.updateDistanceToManeuver()
+        } else if routeController.routeProgress.isFinalLeg && showsEndOfRouteFeedback {
+            self.mapViewController?.showEndOfRoute { _ in }
+        }
+
+        // Reset
+        mapViewController?.isWaitingAtWaypoint = false
+        mapViewController?.navigationView.arrivedButton.isHidden = true
     }
 }
 

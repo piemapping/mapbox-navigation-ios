@@ -26,7 +26,10 @@ extension NavigationView {
         
         resumeButton.leadingAnchor.constraint(equalTo: safeLeadingAnchor, constant: 10).isActive = true
         resumeButton.bottomAnchor.constraint(equalTo: bottomBannerView.topAnchor, constant: -10).isActive = true
-        
+
+        arrivedButton.trailingAnchor.constraint(equalTo: safeTrailingAnchor, constant: -10).isActive = true
+        arrivedButton.bottomAnchor.constraint(equalTo: bottomBannerView.topAnchor, constant: -10).isActive = true
+
         bottomBannerContentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         bottomBannerContentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         bottomBannerContentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true

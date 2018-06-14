@@ -437,7 +437,7 @@ open class RouteController: NSObject {
         }
     }
 
-    func updateDistanceToManeuver() {
+    public func updateDistanceToManeuver() {
         guard let coordinates = routeProgress.currentLegProgress.currentStep.coordinates, let coordinate = rawLocation?.coordinate else {
             userSnapToStepDistanceFromManeuver = nil
             return
@@ -530,7 +530,7 @@ extension RouteController {
             _ = enqueueFoundFasterRouteEvent()
         }
 
-        if let lastReroute: RerouteEvent? = outstandingFeedbackEvents.map({$0 as? RerouteEvent }).last {
+        if let lastReroute = outstandingFeedbackEvents.map({$0 as? RerouteEvent }).last {
             lastReroute?.update(newRoute: routeProgress.route)
         }
 
@@ -992,7 +992,7 @@ extension RouteController: CLLocationManagerDelegate {
     func updateIntersectionDistances() {
         if let coordinates = routeProgress.currentLegProgress.currentStep.coordinates, let intersections = routeProgress.currentLegProgress.currentStep.intersections {
             let polyline = Polyline(coordinates)
-            let distances: [CLLocationDistance] = intersections.map { polyline.distance(from: coordinates.first, to: $0.location) }
+            let distances = intersections.map { polyline.distance(from: coordinates.first, to: $0.location) }
             routeProgress.currentLegProgress.currentStepProgress.intersectionDistances = distances
         }
     }
