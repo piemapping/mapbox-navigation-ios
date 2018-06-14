@@ -111,7 +111,8 @@ open class NavigationView: UIView {
     }()
     
     lazy var resumeButton: ResumeButton = .forAutoLayout()
-    
+    lazy var arrivedButton: ArrivedButton = .forAutoLayout()
+
     lazy var wayNameView: WayNameView = {
         let view: WayNameView = .forAutoLayout(hidden: true)
         view.clipsToBounds = true
@@ -201,6 +202,7 @@ open class NavigationView: UIView {
             informationStackView,
             floatingStackView,
             resumeButton,
+            arrivedButton,
             wayNameView,
             bottomBannerContentView,
             instructionsBannerContentView

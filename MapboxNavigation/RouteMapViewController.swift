@@ -18,7 +18,10 @@ class RouteMapViewController: UIViewController {
     var lanesView: LanesView { return navigationView.lanesView }
     var nextBannerView: NextBannerView { return navigationView.nextBannerView }
     var instructionsBannerView: InstructionsBannerView { return navigationView.instructionsBannerView }
-    
+
+    var arrivedButtonOnTap: (() -> ())?
+    var isWaitingAtWaypoint = false
+
     lazy var endOfRouteViewController: EndOfRouteViewController = {
         let storyboard = UIStoryboard(name: "Navigation", bundle: .mapboxNavigation)
         let viewController = storyboard.instantiateViewController(withIdentifier: "EndOfRouteViewController") as! EndOfRouteViewController
@@ -42,6 +45,7 @@ class RouteMapViewController: UIViewController {
         static let mute: Selector = #selector(RouteMapViewController.toggleMute(_:))
         static let feedback: Selector = #selector(RouteMapViewController.feedback(_:))
         static let recenter: Selector = #selector(RouteMapViewController.recenter(_:))
+        static let arrived: Selector = #selector(RouteMapViewController.arrived(_:))
     }
 
     var route: Route { return routeController.routeProgress.route }
@@ -87,10 +91,17 @@ class RouteMapViewController: UIViewController {
                 navigationView.resumeButton.isHidden = false
                 navigationView.wayNameView.isHidden = true
                 mapView.logoView.isHidden = true
+                if isWaitingAtWaypoint {
+                    navigationView.arrivedButton.isHidden = true
+                }
+
             } else {
                 navigationView.overviewButton.isHidden = false
                 navigationView.resumeButton.isHidden = true
                 mapView.logoView.isHidden = false
+                if isWaitingAtWaypoint {
+                    navigationView.arrivedButton.isHidden = false
+                }
             }
         }
     }
@@ -131,13 +142,17 @@ class RouteMapViewController: UIViewController {
         
         mapView.tracksUserCourse = true
         
-        
         distanceFormatter.numberFormatter.locale = .nationalizedCurrent
         
         navigationView.overviewButton.addTarget(self, action: Actions.overview, for: .touchUpInside)
         navigationView.muteButton.addTarget(self, action: Actions.mute, for: .touchUpInside)
         navigationView.reportButton.addTarget(self, action: Actions.feedback, for: .touchUpInside)
         navigationView.resumeButton.addTarget(self, action: Actions.recenter, for: .touchUpInside)
+        navigationView.arrivedButton.addTarget(self, action: Actions.arrived, for: .touchUpInside)
+
+        // Hide Arrived
+        navigationView.arrivedButton.isHidden = true
+
         resumeNotifications()
         notifyUserAboutLowVolume()
     }
@@ -236,11 +251,20 @@ class RouteMapViewController: UIViewController {
         isInOverviewMode = true
     }
 
+    @objc func arrived(_ sender: Any) {
+        arrivedButtonOnTap?()
+    }
+
     func showMapOverview() {
         guard !isInOverviewMode else {
             return
         }
         toggleOverview(navigationView.overviewButton)
+    }
+
+    func showArrivedButton() {
+        isWaitingAtWaypoint = true
+        navigationView.arrivedButton.isHidden = false
     }
 
     @objc func toggleMute(_ sender: UIButton) {

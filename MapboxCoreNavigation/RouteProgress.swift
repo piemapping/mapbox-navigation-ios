@@ -184,6 +184,10 @@ open class RouteLegProgress: NSObject {
         return remainingSteps.map { $0.expectedTravelTime }.reduce(0, +) + currentStepProgress.durationRemaining
     }
 
+    public var distanceRemaining: CLLocationDistance {
+        return leg.distance - distanceTraveled
+    }
+
     /**
      Number between 0 and 1 representing how far along the current leg the user has traveled.
      */
