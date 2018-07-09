@@ -580,10 +580,6 @@ extension NavigationViewController: RouteMapViewControllerDelegate {
         }
         return roadName
     }
-    
-    @objc public func label(_ label: InstructionLabel, willPresent instruction: VisualInstruction, as presented: NSAttributedString) -> NSAttributedString? {
-        return delegate?.label?(label, willPresent: instruction, as: presented)
-    }
 }
 
 //MARK: - RouteControllerDelegate
