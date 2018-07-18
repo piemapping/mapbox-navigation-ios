@@ -430,14 +430,6 @@ open class NavigationViewController: UIViewController {
 
         mapViewController?.notifyDidChange(routeProgress: routeProgress, location: location, secondsRemaining: secondsRemaining)
         
-        if usesNightStyleInsideTunnels, let tunnelIntersectionManager = routeController.tunnelIntersectionManager {
-            if tunnelIntersectionManager.isAnimationEnabled {
-                styleManager.applyStyle(type: .night)
-            } else  {
-                styleManager.timeOfDayChanged()
-            }
-        }
-
         // Arrived Button
         handleArrivedButtonLogic(with: routeProgress)
     }
