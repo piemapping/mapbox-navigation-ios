@@ -2,6 +2,23 @@ import Foundation
 import MapboxDirections
 import Turf
 
+public class ETAPayload {
+
+    public let waypoint: Waypoint
+    public var eta: TimeInterval
+
+    public init(waypoint: Waypoint, eta: TimeInterval) {
+        self.waypoint = waypoint
+        self.eta = eta
+    }
+
+    public func toPayload() -> [String: Any] {
+        return ["lat": waypoint.coordinate.latitude,
+                "lon": waypoint.coordinate.longitude,
+                "durationRemaining": eta]
+    }
+}
+
 /**
  `RouteProgress` stores the user’s progress along a route.
  */
@@ -51,7 +68,25 @@ open class RouteProgress: NSObject {
     @objc public var durationRemaining: TimeInterval {
         return route.legs.suffix(from: legIndex + 1).map { $0.expectedTravelTime }.reduce(0, +) + currentLegProgress.durationRemaining
     }
-    
+
+    public func durationRemainingForAllWaypoints() -> [ETAPayload] {
+
+        var payloads: [ETAPayload] = []
+
+        // Current leg
+        let first = ETAPayload(waypoint: currentLeg.destination, eta: currentLegProgress.durationRemaining)
+        payloads.append(first)
+
+        // Next waypoint if need
+        let remains = route.legs.suffix(from: legIndex + 1).map { leg -> ETAPayload in
+            return ETAPayload(waypoint: leg.destination, eta: leg.expectedTravelTime)
+        }
+        payloads.append(contentsOf: remains)
+
+        // Return
+        return payloads
+    }
+
     /**
      Number between 0 and 1 representing how far along the `Route` the user has traveled.
      */
