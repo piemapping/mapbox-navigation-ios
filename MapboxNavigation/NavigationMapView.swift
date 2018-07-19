@@ -854,7 +854,7 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
             feature.coordinate = waypoint.coordinate
             feature.attributes = [
                 "waypointCompleted": waypointIndex < legIndex,
-                "name": waypointIndex + 1
+                "name": waypointIndex == 0 ? "*" : waypointIndex
             ]
             features.append(feature)
         }
